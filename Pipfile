@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "*"
+social-auth-app-django = "*"
+oauth2client = "*"
+httplib2 = "*"
+apiclient = "*"
+requests = "*"
+google-api-python-client = "*"
+bs4 = "*"
+
+[requires]
+python_version = "3.7"

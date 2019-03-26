@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Homepage</h2>
+  <p>Hello {{ user.username }}!</p> <a href="{% url 'logout' %}">logout</a>
+<form action="{% url 'meals_app:add_meal' %}" method="post">
+    {% csrf_token %}
+    <input type="date" name="calDate">
+    <input type="time" name="calTime" value="20:00">
+    <input type="submit" value="add a meal to your google calendar">
+</form>
+{% endblock %}
