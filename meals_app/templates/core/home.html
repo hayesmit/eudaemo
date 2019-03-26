@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
   <h2>Homepage</h2>
-  <p>Hello {{ user.username }}!</p> <a href="{% url 'logout' %}">logout</a>
+  <p>Hello {{ user.username }}!</p>
+<a href="{% url 'logout' %}">logout</a>
+
+<button id="One_Meal">One Meal</button>
+    <ul id="one_meal_lists">
+
+    </ul>
+
+
+
 <form action="{% url 'meals_app:add_meal' %}" method="post">
     {% csrf_token %}
     <input type="date" name="calDate">
     <input type="time" name="calTime" value="20:00">
     <input type="submit" value="add a meal to your google calendar">
 </form>
+<script src="{% static 'meals_app/oneMeal.js' %}"></script>
 {% endblock %}
