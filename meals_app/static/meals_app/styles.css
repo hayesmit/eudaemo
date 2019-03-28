@@ -1,0 +1,24 @@
+
+
+h1{
+text-align: center;
+}
+
+body{
+background-color: #f4f4ff;
+}
+
+.login/out{
+float: right;
+}
+
+a {float:right}
+
+.header_option{
+display:inline;
+}
+
+
+#google_login{
+color = blue;
+}

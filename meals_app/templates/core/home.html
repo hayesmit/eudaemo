@@ -1,22 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block login %}
+
+
+
+
+<div>
+
+
+        {% if user.is_authenticated %}
+        <h3>Welcome {{ user.username}}!</h3><br/>
+
+        <a href="{% url 'logout' %}">logout</a>
+        {% else %}
+        <h3>Welcome!</h3>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+        {% endif %}
+
+</div>
+{% endblock %}
 {% block content %}
-  <h2>Homepage</h2>
-  <p>Hello {{ user.username }}!</p>
-<a href="{% url 'logout' %}">logout</a>
+<div class="row">
+    <div class="col">
+        <img src="{% static 'meals_app/Hero-Dinner-Party.jpg' %}" id="dinner_table"  width="100%">
+        <p ><button id="One_Meal">Click Me</button> to get a random recipe.</p>
+            <ul id="one_meal_lists">
 
-<button id="One_Meal">One Meal</button>
-    <ul id="one_meal_lists">
+            </ul>
 
-    </ul>
-
-
-
-<form action="{% url 'meals_app:add_meal' %}" method="post">
-    {% csrf_token %}
-    <input type="date" name="calDate">
-    <input type="time" name="calTime" value="20:00">
-    <input type="submit" value="add a meal to your google calendar">
-</form>
-<script src="{% static 'meals_app/oneMeal.js' %}"></script>
+        <form action="{% url 'meals_app:add_meal' %}" method="post">
+            {% csrf_token %}
+            <input type="date" name="calDate">
+            <input type="time" name="calTime" value="20:00">
+            <input type="submit" value="add a meal to your google calendar">
+        </form>
+        <script src="{% static 'meals_app/oneMeal.js' %}"></script>
+    </div>
+    <div class="col">
+      <p>here will be all the workout options</p>
+    </div>
+    <div class="col">
+        <p>here will be the adding books option</p>
+    </div>
+</div>
 {% endblock %}

@@ -17,7 +17,7 @@ def home(request):
 
 @login_required
 def add_meal(request):
-    random_meal = random.randint(1, 18)
+    random_meal = random.randint(405, 605)
     meal_details = get_object_or_404(Recipe, pk=random_meal)
     # print(meal_details.name)
     # print(meal_details['shopping_list'])
@@ -56,7 +56,7 @@ def add_meal(request):
 
 
 def one_day(request):
-    random_meal = random.randint(1, 18)
+    random_meal = random.randint(405, 605)
     meal_details = get_object_or_404(Recipe, pk=random_meal)
     data = {'cook time': meal_details.cook_time, 'name': meal_details.name, 'shopping_list': meal_details.shopping_list, 'instructions': meal_details.instructions, 'prep_time': meal_details.prep_time, 'servings': meal_details.servings, 'recipe': meal_details.ingredients}
     return JsonResponse(data)

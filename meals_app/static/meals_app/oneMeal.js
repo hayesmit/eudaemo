@@ -1,5 +1,6 @@
 let addMeal = document.getElementById('One_Meal')
 addMeal.addEventListener('click', function(e){
+document.getElementById("One_Meal").innerText = 'Add Another Meal';
 fetch('/one_day', {
     method: 'GET'
 }).then(function(response){
@@ -19,5 +20,6 @@ fetch('/one_day', {
     document.getElementById('one_meal_lists').appendChild(meal_shopping_list);
     document.getElementById('one_meal_lists').appendChild(meal_recipe);
     document.getElementById('one_meal_lists').appendChild(meal_directions);
+    document.getElementById('One_Meal').innerText = 'Add Another Meal';
 })
 })
