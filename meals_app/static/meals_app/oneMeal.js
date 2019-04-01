@@ -23,3 +23,6 @@ fetch('/one_day', {
     document.getElementById('One_Meal').innerText = 'Add Another Meal';
 })
 })
+
+
+

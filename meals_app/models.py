@@ -15,3 +15,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Workout(models.Model):
+    workout = models.CharField(max_length=10000)

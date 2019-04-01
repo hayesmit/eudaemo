@@ -11,37 +11,66 @@
 
         {% if user.is_authenticated %}
         <h3>Welcome {{ user.username}}!</h3><br/>
-
-        <a href="{% url 'logout' %}">logout</a>
         {% else %}
         <h3>Welcome!</h3>
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+
         {% endif %}
 
 </div>
 {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col">
-        <img src="{% static 'meals_app/Hero-Dinner-Party.jpg' %}" id="dinner_table"  width="100%">
-        <p ><button id="One_Meal">Click Me</button> to get a random recipe.</p>
-            <ul id="one_meal_lists">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{% static 'meals_app/dinner-party.jpg' %}"  >
+            <h4>Live longer by preparing healthy meals.</h4>
+            <p ><button id="One_Meal">Click Me</button> to get a random recipe.</p>
+                <ul id="one_meal_lists">
+                </ul>
 
+            <form action="{% url 'meals_app:add_meal' %}" method="post">
+                {% csrf_token %}
+                <input type="date" name="calDate">
+                <input type="time" name="calTime" value="20:00">
+                <input type="submit" value="add a meal to your google calendar">
+            </form>
+            <script src="{% static 'meals_app/oneMeal.js' %}"></script>
+        </div>
+
+
+        <div class="col-sm-4">
+            <img src="{% static 'meals_app/workout.jpg' %}">
+            <h4>Running out of ideas in regards to staying active? Here you go</h4>
+            <p ><button id="One_Workout">Click Me</button> to get a random workout.</p>
+            <ul id="one_workout_list">
             </ul>
+            <form action="{% url 'meals_app:add_workout' %}" method="post">
+                {% csrf_token %}
+                <input type="date" name="workoutCalDate">
+                <input type="time" name="workoutCalTime" value="20:00">
+                <input type="submit" value="add a workout to your google calendar">
+            </form>
+            <script src="{% static 'meals_app/oneWorkout.js' %}"></script>
 
-        <form action="{% url 'meals_app:add_meal' %}" method="post">
-            {% csrf_token %}
-            <input type="date" name="calDate">
-            <input type="time" name="calTime" value="20:00">
-            <input type="submit" value="add a meal to your google calendar">
-        </form>
-        <script src="{% static 'meals_app/oneMeal.js' %}"></script>
-    </div>
-    <div class="col">
-      <p>here will be all the workout options</p>
-    </div>
-    <div class="col">
-        <p>here will be the adding books option</p>
+        </div>
+        <div class="col-sm-4">
+            <img src="{% static 'meals_app/books.jpg' %}">
+            <h4>Be a nerd - read a book.</h4>
+            <form action="{% url 'meals_app:add_book' %}" method="post">
+                {% csrf_token %}
+                <p><input type="date" name="bookStartDate">Start Date</p>
+                <p><input type="date" name="bookFinishDate">Finish Date</p>
+                <p><input type="time" name="bookReminderTime" value="20:00">Set reminders to this time</p>
+                <p><input type="text" name="title"> Title of book?</p>
+                <p><input type="number" name="pages" value="250"> Pages in book?</p>
+                <p><input type="number" name="reminderFrequency" value="7">Remind me every X number of days.</p>
+                <input type="submit" value="Add Reading Goals to My Google Calendar">
+            </form>
+            <script src="{% static 'meals_app/books.js' %}"></script>
+
+
+        </div>
     </div>
 </div>
 {% endblock %}
+

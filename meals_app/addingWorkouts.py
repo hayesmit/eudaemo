@@ -7,61 +7,38 @@ import json
 'https://cookieandkate.com/?s=quinoa'
 
 
-def add_meal(name, shoppingList, ingredients, instructions, prepTime, cookTime, totalTime, servings):
-    new_meal = Recipe(name=name, shopping_list=shoppingList, ingredients=ingredients, instructions=instructions, prep_time=prepTime, cook_time=cookTime, total_time=totalTime, servings=servings)
-    new_meal.save()
+# def add_meal(name, shoppingList, ingredients, instructions, prepTime, cookTime, totalTime, servings):
+#     new_meal = Recipe(name=name, shopping_list=shoppingList, ingredients=ingredients, instructions=instructions, prep_time=prepTime, cook_time=cookTime, total_time=totalTime, servings=servings)
+#     new_meal.save()
+
+def add_workout(workout):
+    new_workout = Workout(workout=workout)
+    new_workout.save()
 
 
-def add_meals(recipesUrl):
-    source = requests.get(recipesUrl).text
-
+def add_workouts(workoutUrl):
+    url = workoutUrl
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    # print(url)
+    # print(soup)
+    # print(soup.findAll('div'))
+    source = requests.get(workoutUrl, headers=headers).text
     soup = BeautifulSoup(source, "html.parser")
-
-    for article in soup.findAll('article'):
-        #get next url
-        url = article.find('a')
-        #get title of the dish to make
-        title = url.text
-        print(title)
-        if title == '':
-            continue
-
-        url_href = url['href']
-        #print(url['href'])
-        open_link = requests.get(url_href).text
-        new_page = BeautifulSoup(open_link, "html.parser")
-        #print(new_page.prettify())
-        correctHeading = new_page.findAll('script', type='application/ld+json')
-        recipeInformation = json.loads(correctHeading[1].text)
-        ingredients = ', '.join(recipeInformation['recipeIngredient'])
-        prepTime = new_page.find(class_='tasty-recipes-prep-time').text
-        cookTime = new_page.find(class_='tasty-recipes-cook-time').text
-        totalTime = new_page.find(class_='tasty-recipes-total-time').text
-        servings = new_page.find(class_='tasty-recipes-yield').text
-        # print("prep time: " + prepTime)
-        # print('cook time: ' + cookTime)
-        # print('total time: ' + totalTime)
-        # print('servings: ' + servings)
-        # print(ingredients)
-        instructions = ', '.join(recipeInformation['recipeInstructions'])
-        # print(instructions)
-        shorten = ingredients.split(", ")
-        # any ingredient that we might need to get from the store is going to start with one of the units in this list, add more as needed.
-        units = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1/4", "1/3", "1/2", "teaspoon", "Freshly", "teaspoons", "tablespoon", "tablespoons", "Pinch", "cup", "cups", 'Scant', "(15 ounces)", "(32 ounces)", "(28 ounces)"]
-        # shopping_list is the list of all the items and the quantity of those items that you are going to need to prepare the meal.
-        shopping_list = []
-        # putting new item on shopping list
-        for item in shorten:
-            # print(item)
-            # split up each word in the list of items so that we can single out the first word or number in the item.
-            i = item.split(" ")
-            # print(i)
-            # checking first word
-            if i[0] in units:
-                if len(shopping_list) > 0:
-                    shopping_list.extend(', ' + item)
-                else:
-                    shopping_list.extend(item)
-        shopping_list = ''.join(shopping_list)
-        print(shopping_list)
-        add_meal(name=title, shoppingList=shopping_list, ingredients=ingredients, instructions=instructions, prepTime=prepTime, cookTime=cookTime, totalTime=totalTime, servings=servings)
+    ultag = soup.find('ul', {'class': ['workout-list']})
+    # print(workout.prettify())
+    this_workout = []
+    for litag in ultag.find_all('li'):
+        this_workout.append(litag.text)
+        # print(litag.text)
+    this_workout = ' ,'.join(this_workout)
+    add_workout(this_workout)
+    print(this_workout + " has been added to DB")
+    # this_workout = workout.text()
+    # print(this_workout)
+    # page = page + 1
+#
+#
+# 'AMRAP in 7 minutes, 3 Thrusters (100/65 lb), 3 Chest-to-Bar Pull-Ups, 6 Thrusters (100/65 lb), 6 Chest-to-Bar Pull-Ups, 9 Thrusters (100/65 lb), 9 Chest-to-Bar Pull-Ups, If you complete the round of 9, complete a round of 12, then go on to 15, etc.'
+# python manage.py shell
+# from meals_app import addingWorkouts
+# addingWorkouts.add_workouts('https://wodwell.com/wod/open-11-/')
