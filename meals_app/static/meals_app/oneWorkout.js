@@ -4,29 +4,21 @@ console.log('button pressed')
 fetch('/one_workout', {
     method: 'GET'
 }).then(function(response){
-    response.json();
+    return response.json();
     })
     .then(function(myjson){
     console.log(myjson)
-//    myjson = myjson.split(', ');
-//    for line in myjson:
-//        let workout_data = document.createElement('li');
-//        document.getElementById('one_workout_list').appendChild(workout_data);
+    myjson = myjson['workout'].split(',');
+    console.log(myjson);
+    myjson.forEach(function(line){
+        if (line !== ' '){
+            let workout_data = document.createElement('li');
+            workout_data.innerText = line;
+            document.getElementById('one_workout_list').appendChild(workout_data);
+}
 })
 })
-
-
-
-//let addMeal = document.getElementById('One_Meal')
-//addMeal.addEventListener('click', function(e){
-//document.getElementById("One_Meal").innerText = 'Add Another Meal';
-//fetch('/one_day', {
-//    method: 'GET'
-//}).then(function(response){
-//    return response.json();
-//    })
-//    .then(function(myjson){
-////        console.log(myjson)
+})
 //    let meal_data = document.createElement('li');
 //    meal_data.innerText = 'Name: ' + myjson['name'] + '  Prep Time: ' + myjson['prep_time'] + '  Cook Time: ' + myjson['cook time'] + '  Servings: ' + myjson['servings']
 //    let meal_shopping_list = document.createElement('li');

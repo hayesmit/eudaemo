@@ -11,9 +11,37 @@ from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.http import JsonResponse
 
-# @login_required
+
 def home(request):
     return render(request, 'core/home.html')
+
+
+def about(request):
+    return render(request, 'core/about.html')
+
+
+def contact(request):
+    return render(request, 'core/contact.html')
+
+
+def single_meal(request):
+    return render(request, 'core/singleMeal.html')
+
+
+def google_meal(request):
+    return render(request, 'core/googleMeal.html')
+
+
+def single_workout(request):
+    return render(request, 'core/singleWorkout.html')
+
+
+def google_workout(request):
+    return render(request, 'core/googleWorkout.html')
+
+
+def google_book(request):
+    return render(request, 'core/googleBook.html')
 
 
 @login_required
@@ -182,29 +210,3 @@ def add_book(request):
             print(event)
             start_adding_goals = start_adding_goals + int(frequency)
     return render(request, 'core/home.html')
-
-
-    # reminderFrequency = query['reminderFrequency']
-    # bookReminderTime = query['bookReminderTime']
-    # startDay =
-    # while totalTime
-
-#     > s = '2004/03/30'
-# >>> date = datetime.strptime(s, "%Y/%m/%d")
-# >>> modified_date = date + timedelta(days=1)
-# >>> datetime.strftime(modified_date, "%Y/%m/%d")
-# '2004/03/31'
-
-
-
-
-     # <form action="{% url 'meals_app:add_book' %}" method="post">
-    #                 {% csrf_token %}
-    #                 <p><input type="date" name="bookStartDate">Start Date</p>
-    #                 <p><input type="date" name="bookFinishDate">Finish Date</p>
-    #                 <p><input type="time" name="bookReminderTime" value="20:00">Set reminders to this time</p>
-    #                 <p><input type="number" name="title"> Title of book?</p>
-    #                 <p><input type="number" name="pages" value="250"> Pages in book?</p>
-    #                 <p><input type="number" name="reminderFrequency" value="7">Remind me every X number of days.</p>
-    #                 <input type="submit" value="Add Reading Goals to My Google Calendar">
-    #             </form>

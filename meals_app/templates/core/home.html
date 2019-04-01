@@ -12,7 +12,7 @@
         {% if user.is_authenticated %}
         <h3>Welcome {{ user.username}}!</h3><br/>
         {% else %}
-        <h3>Welcome!</h3>
+        <h3>Welcome!</h3><br/><br/>
 
         {% endif %}
 
@@ -22,6 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
+            <h3>Eat</h3>
             <img src="{% static 'meals_app/dinner-party.jpg' %}"  >
             <h4>Live longer by preparing healthy meals.</h4>
             <p ><button id="One_Meal">Click Me</button> to get a random recipe.</p>
@@ -32,13 +33,14 @@
                 {% csrf_token %}
                 <input type="date" name="calDate">
                 <input type="time" name="calTime" value="20:00">
-                <input type="submit" value="add a meal to your google calendar">
+                <p><input type="submit" value="Click"> to add a meal to your google calendar</p>
             </form>
             <script src="{% static 'meals_app/oneMeal.js' %}"></script>
         </div>
 
 
         <div class="col-sm-4">
+            <h3>Exercise</h3>
             <img src="{% static 'meals_app/workout.jpg' %}">
             <h4>Running out of ideas in regards to staying active? Here you go</h4>
             <p ><button id="One_Workout">Click Me</button> to get a random workout.</p>
@@ -48,12 +50,14 @@
                 {% csrf_token %}
                 <input type="date" name="workoutCalDate">
                 <input type="time" name="workoutCalTime" value="20:00">
-                <input type="submit" value="add a workout to your google calendar">
+                <p><input type="submit" value="Click"> to add a workout to your google calendar</p>
             </form>
             <script src="{% static 'meals_app/oneWorkout.js' %}"></script>
 
         </div>
+
         <div class="col-sm-4">
+            <h3>Read</h3>
             <img src="{% static 'meals_app/books.jpg' %}">
             <h4>Be a nerd - read a book.</h4>
             <form action="{% url 'meals_app:add_book' %}" method="post">
@@ -64,7 +68,7 @@
                 <p><input type="text" name="title"> Title of book?</p>
                 <p><input type="number" name="pages" value="250"> Pages in book?</p>
                 <p><input type="number" name="reminderFrequency" value="7">Remind me every X number of days.</p>
-                <input type="submit" value="Add Reading Goals to My Google Calendar">
+                <p><input type="submit" value="Click">to add reading goals to your google calendar</p>
             </form>
             <script src="{% static 'meals_app/books.js' %}"></script>
 
